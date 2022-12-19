@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../35. classlist"
+		},
+		{
+			"path": "../../3-modul. serial source code"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../38.animation"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "3-modul. Starter source code"
+	}
+}
