@@ -1,6 +1,7 @@
 //Global varibles
 const canvas = document.querySelector("canvas"),
-  toolBtns = document.querySelectorAll(".tool");
+  toolBtns = document.querySelectorAll(".tool"),
+  fillColor = document.querySelector("#fill-color");
 // Varibles
 let ctx = canvas.getContext("2d"),
   isDrawing = false,
@@ -30,13 +31,32 @@ const endDrawing = () => {
 };
 //Draw ractangle
 const drawRectangle = (e) => {
-  ctx.strokeRect(
-    //tortburchak chizish
-    e.offsetX,
-    e.offsetY,
-    prevMouseX - e.offsetX,
-    prevmouseY - e.offsetY
-  );
+  if (!fillColor.checked) {
+    ctx.strokeRect(
+      //tortburchak border qismini chizib beradi yani ichi boyalmagan
+      e.offsetX,
+      e.offsetY,
+      prevMouseX - e.offsetX,
+      prevmouseY - e.offsetY
+    );
+  } else {
+    ctx.fillRect(
+      //tortburchak ichini rang bilan toldirib chizadi
+      e.offsetX,
+      e.offsetY,
+      prevMouseX - e.offsetX,
+      prevmouseY - e.offsetY
+    );
+  }
+};
+//drawCircle
+const drawCircle = (e) => {
+  ctx.beginPath();
+  const radius =
+    Math.sqrt(Math.pow(prevMouseX - e.offsetX, 2)) / 1.4 +
+    Math.sqrt(Math.pow(prevmouseY - e.offsetY, 2)) / 1.4;
+  ctx.arc(prevMouseX, prevmouseY, radius, 90, 90 * Math.PI);
+  fillColor.checked ? ctx.fill() : ctx.stroke();
 };
 //Drawing
 const drawing = (e) => {
@@ -51,6 +71,9 @@ const drawing = (e) => {
       break;
     case "restangle":
       drawRectangle(e);
+      break;
+    case "circle":
+      drawCircle(e);
       break;
     default:
       break;
